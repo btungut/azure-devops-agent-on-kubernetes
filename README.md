@@ -1,4 +1,4 @@
-[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/azure-devops-agent)](https://artifacthub.io/packages/search?repo=azure-devops-agent)
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/btungut)](https://artifacthub.io/packages/helm/btungut/azure-devops-agent)
 [![Release](https://img.shields.io/github/v/release/btungut/azure-devops-agent-on-kubernetes?include_prereleases&style=plastic)](https://github.com/btungut/azure-devops-agent-on-kubernetes/releases/tag/v1.0.5)
 [![LICENSE](https://img.shields.io/github/license/btungut/azure-devops-agent-on-kubernetes?style=plastic)](https://github.com/btungut/azure-devops-agent-on-kubernetes/blob/master/LICENSE)
 
