@@ -1,0 +1,24 @@
+apiVersion: v2
+name: azure-devops-agent
+description: Dockerized build agent for Azure DevOps
+type: application
+version: 1.0.5
+appVersion: "2.204.0"
+keywords:
+  - azure devops
+  - build agent
+  - dockerized agent
+  - azure devops agent on kubernetes
+home: "https://github.com/btungut/azure-devops-agent-on-kubernetes"
+sources:
+  - "https://github.com/btungut/azure-devops-agent-on-kubernetes"
+maintainers:
+  - name: "Burak Tungut"
+    email: "burak.tungut@microsoft.com"
+
+annotations:
+  artifacthub.io/containsSecurityUpdates: "false"
+  artifacthub.io/license: MIT
+  artifacthub.io/links: |
+    - name: GitHub
+      url: https://github.com/btungut/azure-devops-agent-on-kubernetes

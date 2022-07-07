@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "agent.fullname" . }}
+  labels:
+    {{- include "agent.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "agent.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+         checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+      {{- if .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "agent.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: {{ include "agent.patSecretName" . | quote }}
+          env:
+            {{- with .Values.agent.extraEnv }}
+            {{- range $key, $val := . }}
+            - name: {{ tpl $key $ | quote }}
+              value: {{ tpl $val $ | quote }}
+            {{- end }}
+            {{- end }}
+            - name: "AZP_TOKEN"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "agent.patSecretName" . | quote }}
+                  key: {{ tpl .Values.agent.patSecretKey . | required "patSecretKey could not be empty." | quote }}
+                  optional: false
+            - name: "AZP_URL"
+              value: {{ .Values.agent.organizationUrl | required "organizationUrl could not be empty." | quote }}
+            - name: "AZP_POOL"
+              value: {{ .Values.agent.pool | required "pool could not be empty." | quote }}
+            - name: "AZP_WORK"
+              value: {{ .Values.agent.workingDirectory | required "workingDirectory could not be empty." | quote }}
+          startupProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - |-
+                  if [[ ! -d "/azp/$AZP_WORK" ]]; then
+                    echo "$AZP_WORK does not exist, probe is failed! Please check the logs for further details." 
+                    exit 1
+                  fi
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 5
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
