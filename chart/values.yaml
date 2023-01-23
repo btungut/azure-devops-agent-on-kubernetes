@@ -28,6 +28,7 @@ fullnameOverride: ""
 replicaCount: 1
 
 image:
+  registry: docker.io
   repository: btungut/azure-devops-agent
   pullPolicy: IfNotPresent
   tag: "2.204.0"
@@ -40,6 +41,15 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
+
+volumes: []
+  # - name: dockersock
+  #   hostPath:
+  #     path: /var/run/docker.sock
+volumeMounts: []
+  # - name: dockersock
+  #   mountPath: "/var/run/docker.sock"
+
 
 
 nodeSelector: {}
