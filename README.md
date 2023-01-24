@@ -91,3 +91,17 @@ helm delete {RELEASE-NAME}
 | `resources.limits.memory` | Memory limit value for scheduling                        | `"512Mi"`                  |
 
 Please refer the values.yaml for other parameters.
+
+## Built-in binaries & packages
+The binaries and packages listed below are included in the docker image used by the helm chart:
+- Ubuntu 18.04
+- unzip
+- jq
+- yq
+- git
+- helm
+- kubectl
+- Powershell Core
+- Docker CLI
+- Azure CLI
+  - with Azure DevOps extension
