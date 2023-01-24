@@ -1,5 +1,5 @@
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/btungut)](https://artifacthub.io/packages/helm/btungut/azure-devops-agent)
-[![Release](https://img.shields.io/github/v/release/btungut/azure-devops-agent-on-kubernetes?include_prereleases&style=plastic)](https://github.com/btungut/azure-devops-agent-on-kubernetes/releases/tag/v1.0.5)
+[![Release](https://img.shields.io/github/v/release/btungut/azure-devops-agent-on-kubernetes?include_prereleases&style=plastic)](https://github.com/btungut/azure-devops-agent-on-kubernetes/releases)
 [![LICENSE](https://img.shields.io/github/license/btungut/azure-devops-agent-on-kubernetes?style=plastic)](https://github.com/btungut/azure-devops-agent-on-kubernetes/blob/master/LICENSE)
 
 # Azure DevOps Agent on Kubernetes
@@ -58,7 +58,7 @@ helm delete {RELEASE-NAME}
 
 ### Agent authentication parameters
 
-> :warning: Helm chart provides two option for authentication. Please use only one them.
+> :warning: Helm chart provides two option for authentication. Please use only one of them.
 
 | Name                | Description                                           | Value                 |
 | ------------------- | ----------------------------------------------------- | --------------------- |
@@ -81,7 +81,7 @@ helm delete {RELEASE-NAME}
 | Name                | Description                                           | Value                 |
 | ------------------- | ----------------------------------------------------- | --------------------- |
 | `image.repository`  | Azure DevOps agent image repository                           | `btungut/azure-devops-agent`       |
-| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `2.204.0` |
+| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `2.214.1` |
 | `image.pullPolicy`  | Azure DevOps agent image pull policy                          | `IfNotPresent`        |
 | `image.pullSecrets` | Azure DevOps agent image pull secrets                         | `[]`                  |
 | `replicaCount` | Replica count for deployment                        | `1`                  |
@@ -89,6 +89,8 @@ helm delete {RELEASE-NAME}
 | `resources.requests.memory` | Memory request value for scheduling                        | `"128Mi"`                  |
 | `resources.limits.cpu` | CPU limit value for scheduling                        | `"500m"`                  |
 | `resources.limits.memory` | Memory limit value for scheduling                        | `"512Mi"`                  |
+| `volumes` | Volumes for the container | `[]`                  |
+| `volumeMounts` | Volume mountings | `[]`                  |
 
 Please refer the values.yaml for other parameters.
 
