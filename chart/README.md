@@ -54,7 +54,7 @@ helm delete {RELEASE-NAME}
 
 ### Agent authentication parameters
 
-> :warning: Helm chart provides two option for authentication. Please use only one them.
+> :warning: Helm chart provides two option for authentication. Please use only one of them.
 
 | Name                | Description                                           | Value                 |
 | ------------------- | ----------------------------------------------------- | --------------------- |
@@ -77,7 +77,7 @@ helm delete {RELEASE-NAME}
 | Name                | Description                                           | Value                 |
 | ------------------- | ----------------------------------------------------- | --------------------- |
 | `image.repository`  | Azure DevOps agent image repository                           | `btungut/azure-devops-agent`       |
-| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `2.204.0` |
+| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `2.214.1` |
 | `image.pullPolicy`  | Azure DevOps agent image pull policy                          | `IfNotPresent`        |
 | `image.pullSecrets` | Azure DevOps agent image pull secrets                         | `[]`                  |
 | `replicaCount` | Replica count for deployment                        | `1`                  |
@@ -85,5 +85,21 @@ helm delete {RELEASE-NAME}
 | `resources.requests.memory` | Memory request value for scheduling                        | `"128Mi"`                  |
 | `resources.limits.cpu` | CPU limit value for scheduling                        | `"500m"`                  |
 | `resources.limits.memory` | Memory limit value for scheduling                        | `"512Mi"`                  |
+| `volumes` | Volumes for the container | `[]`                  |
+| `volumeMounts` | Volume mountings | `[]`                  |
 
 Please refer the values.yaml for other parameters.
+
+## Built-in binaries & packages
+The binaries and packages listed below are included in the docker image used by the helm chart:
+- Ubuntu 18.04
+- unzip
+- jq
+- yq
+- git
+- helm
+- kubectl
+- Powershell Core
+- Docker CLI
+- Azure CLI
+  - with Azure DevOps extension
