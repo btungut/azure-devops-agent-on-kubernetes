@@ -79,7 +79,9 @@ RUN apt-get update \
     && apt-get install -y sudo \
     && echo azuredevops ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/azuredevops \
     && chmod 0440 /etc/sudoers.d/azuredevops
-RUN chown -R azuredevops /azp
+RUN sudo chown -R azuredevops /azp
+RUN sudo chown -R azuredevops /home/azuredevops
+
 USER azuredevops
 
 ENTRYPOINT ["./start.sh"]
