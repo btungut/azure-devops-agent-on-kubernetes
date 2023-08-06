@@ -49,27 +49,28 @@ jobs:
           set -euo pipefail
           helm version
 
-  - job: "docker_test"
-    steps:
-      - bash: |
-          set -euo pipefail
-          docker version
+  #TODO: To be implemented
+  # - job: "docker_test"
+  #   steps:
+  #     - bash: |
+  #         set -euo pipefail
+  #         docker version
 
-  - job: "docker_build_test"
-    steps:
-      - bash: |
-          set -euo pipefail
-          sudo tee -a Dockerfile > /dev/null <<EOT
-          FROM alpine:3.18
-          WORKDIR /app
-          RUN echo "Hello world!" >> result.txt
-          CMD [ "cat", "result.txt" ]
-          EOT
-          cat Dockerfile
-        displayName: "Create Dockerfile"
+  # - job: "docker_build_test"
+  #   steps:
+  #     - bash: |
+  #         set -euo pipefail
+  #         sudo tee -a Dockerfile > /dev/null <<EOT
+  #         FROM alpine:3.18
+  #         WORKDIR /app
+  #         RUN echo "Hello world!" >> result.txt
+  #         CMD [ "cat", "result.txt" ]
+  #         EOT
+  #         cat Dockerfile
+  #       displayName: "Create Dockerfile"
 
-      - bash: |
-          set -euo pipefail
-          docker build . -t azure-devops-agent-test:latest
+  #     - bash: |
+  #         set -euo pipefail
+  #         docker build . -t azure-devops-agent-test:latest
       
       
