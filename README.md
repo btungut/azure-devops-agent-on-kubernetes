@@ -81,7 +81,7 @@ helm delete {RELEASE-NAME}
 | Name                | Description                                           | Value                 |
 | ------------------- | ----------------------------------------------------- | --------------------- |
 | `image.repository`  | Azure DevOps agent image repository                           | `btungut/azure-devops-agent`       |
-| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `2.214.1` |
+| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `3.220.5` |
 | `image.pullPolicy`  | Azure DevOps agent image pull policy                          | `IfNotPresent`        |
 | `image.pullSecrets` | Azure DevOps agent image pull secrets                         | `[]`                  |
 | `replicaCount` | Replica count for deployment                        | `1`                  |
