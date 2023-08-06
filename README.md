@@ -115,3 +115,8 @@ The binaries and packages listed below are included in the docker image used by 
 - Docker CLI
 - Azure CLI
   - with Azure DevOps extension
+
+## Testing
+Docker images which built from the Dockerfile located in this repository can be tested with the Azure DevOps Yaml pipeline that located into `./test/azdo-pipeline.yml`
+
+![testing pipeline](./.assets/test-pipeline-result.png)
