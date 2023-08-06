@@ -56,5 +56,8 @@ nodeSelector: {}
 tolerations: []
 affinity: {}
 podAnnotations: {}
-podSecurityContext: {}
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 10000
+  runAsGroup: 10000
 securityContext: {}

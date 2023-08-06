@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
 
+
 # To make it easier for build and release pipelines to run apt-get,
 # configure apt to not require confirmation (assume the -y argument by default)
 ENV DEBIAN_FRONTEND=noninteractive
@@ -31,9 +32,6 @@ RUN az extension add --name azure-devops
 ENV TARGETARCH=linux-x64
 
 WORKDIR /azp
-
-COPY ./start.sh .
-RUN chmod +x start.sh
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
@@ -70,6 +68,18 @@ RUN apt-get update \
 
 RUN apt-get update && apt-get -y upgrade
 
-RUN curl -LsS https://vstsagentpackage.azureedge.net/agent/2.214.1/vsts-agent-linux-x64-2.214.1.tar.gz | tar -xz
+COPY ./start.sh .
+RUN chmod +x start.sh
+RUN curl -LsS https://vstsagentpackage.azureedge.net/agent/3.220.5/vsts-agent-linux-x64-3.220.5.tar.gz | tar -xz
+
+# Create and swith to non-root user
+RUN groupadd -g "10000" azuredevops
+RUN useradd --create-home --no-log-init -u "10000" -g "10000" azuredevops
+RUN apt-get update \
+    && apt-get install -y sudo \
+    && echo azuredevops ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/azuredevops \
+    && chmod 0440 /etc/sudoers.d/azuredevops
+RUN chown -R azuredevops /azp
+USER azuredevops
 
 ENTRYPOINT ["./start.sh"]
