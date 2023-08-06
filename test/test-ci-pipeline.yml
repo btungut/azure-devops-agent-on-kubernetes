@@ -1,0 +1,67 @@
+trigger: none
+
+pool: "Default"
+
+jobs:
+  - job: "yq_test"
+    variables:
+      YamlFile: "test.yaml"
+    steps:
+      - bash: |
+          sudo tee -a $(YamlFile) > /dev/null <<EOT
+          word: foo
+          number: 123
+          EOT
+          cat $(YamlFile)
+        displayName: "Create yaml file"
+          
+      - bash: |
+          set -euo pipefail
+
+          WORD=$(yq '.word' test.yaml)
+          if [[ "${WORD}" != "foo" ]]; then
+            echo "word != foo"
+            exit 1
+          fi
+
+          NUMBER=$(yq '.number' test.yaml)
+          if [[ "${NUMBER}" != "123" ]]; then
+            echo "word != 123"
+            exit 1
+          fi
+
+  - job: "azure_cli_test"
+    steps:
+      - bash: |
+          set -euo pipefail
+          az version
+
+  - job: "kubectl_test"
+    steps:
+      - bash: |
+          set -euo pipefail
+          kubectl version
+
+  - job: "helm_test"
+    steps:
+      - bash: |
+          set -euo pipefail
+          helm version
+
+  - job: "docker_test"
+    steps:
+      - bash: |
+          sudo tee -a Dockerfile > /dev/null <<EOT
+          FROM alpine:3.18
+          WORKDIR /app
+          RUN echo "Hello world!" >> result.txt
+          CMD [ "cat", "result.txt" ]
+          EOT
+          cat Dockerfile
+        displayName: "Create Dockerfile"
+
+      - bash: |
+          set -euo pipefail
+          docker build . -t azure-devops-agent-test:latest
+      
+      
