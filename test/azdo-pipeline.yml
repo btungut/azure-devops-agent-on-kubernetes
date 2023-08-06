@@ -59,20 +59,22 @@ jobs:
   - job: "docker_build_test"
     dependsOn: docker_test
     condition: succeeded('docker_test')
+    variables:
+      Dockerfile: "Dockerfile.test"
     steps:
       - bash: |
           set -euo pipefail
-          sudo tee -a Dockerfile > /dev/null <<EOT
+          sudo tee -a $(Dockerfile) > /dev/null <<EOT
           FROM alpine:3.18
           WORKDIR /app
           RUN echo "Hello world!" >> result.txt
           CMD [ "cat", "result.txt" ]
           EOT
-          cat Dockerfile
+          cat $(Dockerfile)
         displayName: "Create Dockerfile"
 
       - bash: |
           set -euo pipefail
-          sudo docker build . -t azure-devops-agent-test:latest
+          sudo docker build . -f $(Dockerfile) -t azure-devops-agent-test:latest
       
       
