@@ -54,7 +54,7 @@ jobs:
     steps:
       - bash: |
           set -euo pipefail
-          docker version
+          sudo docker version
 
   - job: "docker_build_test"
     dependsOn: docker_test
@@ -73,6 +73,6 @@ jobs:
 
       - bash: |
           set -euo pipefail
-          docker build . -t azure-devops-agent-test:latest
+          sudo docker build . -t azure-devops-agent-test:latest
       
       
