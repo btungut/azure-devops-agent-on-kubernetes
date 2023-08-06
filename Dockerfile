@@ -81,7 +81,7 @@ RUN apt-get update \
     && chmod 0440 /etc/sudoers.d/azuredevops
 RUN sudo chown -R azuredevops /azp
 RUN sudo chown -R azuredevops /home/azuredevops
-RUN sudo chown -R azuredevops /var/run/docker.sock
+
 USER azuredevops
 
 ENTRYPOINT ["./start.sh"]
