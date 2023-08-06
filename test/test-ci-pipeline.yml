@@ -8,6 +8,7 @@ jobs:
       YamlFile: "test.yaml"
     steps:
       - bash: |
+          set -euo pipefail
           sudo tee -a $(YamlFile) > /dev/null <<EOT
           word: foo
           number: 123
@@ -51,6 +52,13 @@ jobs:
   - job: "docker_test"
     steps:
       - bash: |
+          set -euo pipefail
+          docker version
+
+  - job: "docker_build_test"
+    steps:
+      - bash: |
+          set -euo pipefail
           sudo tee -a Dockerfile > /dev/null <<EOT
           FROM alpine:3.18
           WORKDIR /app
