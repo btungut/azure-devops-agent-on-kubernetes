@@ -7,6 +7,7 @@ The easiest and most effective method for creating and managing Azure DevOps age
 Since the **1.0.8 release** , the Dockerfile and Helm chart have been configured to utilize a non-root user. 
 
 :white_check_mark: [Issue : Non-root user should be implemented](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/3)
+:white_check_mark: [Issue : docker could be called without sudo](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/5)
 
 ## Prerequisites
 - Helm
