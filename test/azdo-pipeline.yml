@@ -57,6 +57,8 @@ jobs:
           docker version
 
   - job: "docker_build_test"
+    dependsOn: docker_test
+    condition: succeeded('docker_test')
     steps:
       - bash: |
           set -euo pipefail
