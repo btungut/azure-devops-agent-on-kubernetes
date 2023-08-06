@@ -2,6 +2,12 @@
 
 The easiest and most effective method for creating and managing Azure DevOps agents on Kubernetes, without the need to spend time and effort wrestling with settings! Scale-out as much as is necessary and demolish them gracefully.
 
+## Important Release Notes
+### Non Root User Support
+Since the **1.0.8 release** , the Dockerfile and Helm chart have been configured to utilize a non-root user. 
+
+:white_check_mark: [Issue : Non-root user should be implemented](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/3)
+
 ## Prerequisites
 - Helm
 - Personal Access Token _with Agent Pool manage scope_
@@ -77,7 +83,7 @@ helm delete {RELEASE-NAME}
 | Name                | Description                                           | Value                 |
 | ------------------- | ----------------------------------------------------- | --------------------- |
 | `image.repository`  | Azure DevOps agent image repository                           | `btungut/azure-devops-agent`       |
-| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `2.214.1` |
+| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `3.220.5` |
 | `image.pullPolicy`  | Azure DevOps agent image pull policy                          | `IfNotPresent`        |
 | `image.pullSecrets` | Azure DevOps agent image pull secrets                         | `[]`                  |
 | `replicaCount` | Replica count for deployment                        | `1`                  |
