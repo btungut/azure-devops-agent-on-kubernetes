@@ -3,37 +3,29 @@ agent:
   # !!! This helm chart provides two way for passing the personal access token. PLEASE fill only 'pat' or 'patSecret'.
   # 1st way: Personal access token could be passed with 'pat' field.
   pat: ""
-
   # 2nd way: If a secret that contains personal access token exists in kubernetes, its name and key could be passed with following fields.
   patSecret: ""
   patSecretKey: "pat"
   # ---------- AUTH  ----------
 
-  
   # Server / organization url, e.g.: https://dev.azure.com/your-organization-name
   organizationUrl: ""
-
   # Agent pool name which the build agent is placed into
   pool: "Default"
-
   # Working directory of agent
   workingDirectory: "_work"
-
   # Additional environment variables, if you need
   extraEnv: {}
-    # ENVNAME: "VALUE"
-
+  # ENVNAME: "VALUE"
 nameOverride: ""
 fullnameOverride: ""
 replicaCount: 1
-
 image:
   registry: docker.io
   repository: btungut/azure-devops-agent
   pullPolicy: IfNotPresent
   tag: "3.220.5"
   pullSecrets: []
-
 resources:
   limits:
     cpu: 500m
@@ -41,20 +33,18 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
-
 volumes: []
-  # - name: dockersock
-  #   hostPath:
-  #     path: /var/run/docker.sock
+# - name: dockersock
+#   hostPath:
+#     path: /var/run/docker.sock
 volumeMounts: []
-  # - name: dockersock
-  #   mountPath: "/var/run/docker.sock"
-
-
+# - name: dockersock
+#   mountPath: "/var/run/docker.sock"
 
 nodeSelector: {}
 tolerations: []
 affinity: {}
+podLabels: {}
 podAnnotations: {}
 podSecurityContext:
   runAsNonRoot: true
