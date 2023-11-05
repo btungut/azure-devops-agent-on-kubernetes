@@ -1,6 +1,7 @@
 trigger: none
 
-pool: "Default"
+pool:
+  vmImage: 'ubuntu-latest'
 
 jobs:
   - job: "yq_test"
