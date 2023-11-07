@@ -111,3 +111,8 @@ The binaries and packages listed below are included in the docker image used by 
 - Docker CLI
 - Azure CLI
   - with Azure DevOps extension
+
+## Contributors
+
+- [Burak Tungut](https://github.com/btungut)
+- [Alexandre Saison](https://github.com/saisona)

@@ -51,10 +51,21 @@ volumeMounts: []
   #   mountPath: "/var/run/docker.sock"
 
 
+serviceAccount:
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
 
 nodeSelector: {}
 tolerations: []
 affinity: {}
+podLabels: {}
 podAnnotations: {}
 podSecurityContext:
   runAsNonRoot: true
