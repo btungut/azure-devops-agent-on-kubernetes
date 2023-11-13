@@ -12,10 +12,10 @@ spec:
   template:
     metadata:
       annotations:
-         checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
-      {{- if .Values.podAnnotations }}
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
+        checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
       labels:
         {{- include "agent.selectorLabels" . | nindent 8 }}
     spec:
@@ -23,6 +23,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      serviceAccountName: {{ include "agent.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:

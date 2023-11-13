@@ -3,7 +3,18 @@
 The easiest and most effective method for creating and managing Azure DevOps agents on Kubernetes, without the need to spend time and effort wrestling with settings! Scale-out as much as is necessary and demolish them gracefully.
 
 ## Important Release Notes
-### Non Root User Support
+
+### 1.0.9
+
+- Pod Annotations have been implemented
+- Service Account support has been implemented
+
+:white_check_mark: Thanks for contribitions to [Alexandre Saison](https://github.com/saisona)
+
+:white_check_mark: PR: https://github.com/btungut/azure-devops-agent-on-kubernetes/pull/8
+
+
+### 1.0.8
 Since the **1.0.8 release** , the Dockerfile and Helm chart have been configured to utilize a non-root user. 
 
 :white_check_mark: [Issue : Non-root user should be implemented](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/3)
@@ -111,3 +122,8 @@ The binaries and packages listed below are included in the docker image used by 
 - Docker CLI
 - Azure CLI
   - with Azure DevOps extension
+
+## Contributors
+
+- [Burak Tungut](https://github.com/btungut)
+- [Alexandre Saison](https://github.com/saisona)

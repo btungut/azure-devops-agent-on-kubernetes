@@ -40,6 +40,9 @@ helm.sh/chart: {{ include "agent.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- if .Values.podLabels }}
+{{ .Values.podLabels | toYaml -}}
+{{- end }}
 {{- end }}
 
 {{/*
@@ -55,5 +58,16 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- include "agent.fullname" . }}-pat
 {{- else }}
 {{- .Values.agent.patSecret }}
+{{- end }}
+{{- end }}
+
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "agent.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create }}
+{{- default (include "agent.fullname" .) .Values.serviceAccount.name }}
+{{- else }}
+{{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
