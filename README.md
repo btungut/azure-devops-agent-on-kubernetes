@@ -8,6 +8,14 @@ The easiest and most effective method for creating and managing Azure DevOps age
 
 ## Important Release Notes
 
+### 2.0.0
+
+- :white_check_mark: [ubuntu 20.04 based image](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/13)
+- :white_check_mark: [yq upgrade to 4.40.7](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/12)
+- :white_check_mark: [docker command could be executed without sudo](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/11)
+- :white_check_mark: [Support for VSTS agent 3.232.3](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/10)
+
+
 ### 1.0.9
 
 - Pod Annotations have been implemented
@@ -100,7 +108,7 @@ helm delete {RELEASE-NAME}
 | Name                | Description                                           | Value                 |
 | ------------------- | ----------------------------------------------------- | --------------------- |
 | `image.repository`  | Azure DevOps agent image repository                           | `btungut/azure-devops-agent`       |
-| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `3.220.5` |
+| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `3.232.3` |
 | `image.pullPolicy`  | Azure DevOps agent image pull policy                          | `IfNotPresent`        |
 | `image.pullSecrets` | Azure DevOps agent image pull secrets                         | `[]`                  |
 | `replicaCount` | Replica count for deployment                        | `1`                  |
@@ -115,7 +123,7 @@ Please refer the values.yaml for other parameters.
 
 ## Built-in binaries & packages
 The binaries and packages listed below are included in the docker image used by the helm chart:
-- Ubuntu 18.04
+- Ubuntu 20.04
 - unzip
 - jq
 - yq
