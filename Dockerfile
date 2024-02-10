@@ -81,4 +81,9 @@ RUN sudo chown -R azuredevops /home/azuredevops
 
 USER azuredevops
 
+# Create docker user group and utilize it
+RUN sudo groupadd docker
+RUN sudo usermod -aG docker azuredevops
+RUN sudo newgrp docker
+
 ENTRYPOINT ["./start.sh"]
