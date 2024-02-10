@@ -70,7 +70,7 @@ RUN apt-get update && apt-get -y upgrade
 
 COPY ./start.sh .
 RUN chmod +x start.sh
-RUN curl -LsS https://vstsagentpackage.azureedge.net/agent/3.220.5/vsts-agent-linux-x64-3.220.5.tar.gz | tar -xz
+RUN curl -LsS https://vstsagentpackage.azureedge.net/agent/3.232.3/vsts-agent-linux-x64-3.232.3.tar.gz | tar -xz
 
 # Create and swith to non-root user
 RUN groupadd -g "10000" azuredevops
