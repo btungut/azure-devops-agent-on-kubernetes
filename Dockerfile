@@ -6,6 +6,11 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 
+# Default available python version to install
+# This always downloads the latest available patch version
+# Keep it empty for default behaviour
+ARG PYTHON_AVAILABLE_VERSION_VERSIONS="3.10 3.11"
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
     apt-utils \
@@ -16,12 +21,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     jq \
     lsb-release \
     software-properties-common \
-  && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get -y upgrade
 
 RUN curl -LsS https://aka.ms/InstallAzureCLIDeb | bash \
-  && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 RUN az extension add --name azure-devops
 
@@ -29,6 +34,11 @@ RUN az extension add --name azure-devops
 ENV TARGETARCH=linux-x64
 
 WORKDIR /azp
+
+COPY ./pre-install.sh .
+RUN chmod +x pre-install.sh && \
+    ./pre-install.sh && \
+    rm ./pre-install.sh
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
@@ -58,8 +68,8 @@ RUN apt-get update \
 #install docker cli
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 RUN echo \
-      "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-      $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+    "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 RUN apt-get update \
     && apt-get install -y docker-ce-cli
 
