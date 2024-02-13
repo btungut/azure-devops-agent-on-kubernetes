@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 
 # To make it easier for build and release pipelines to run apt-get,
@@ -7,18 +7,15 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    apt-transport-https \
+    apt-utils \
     ca-certificates \
     curl \
-    jq \
     git \
     iputils-ping \
-    libcurl4 \
-    libicu60 \
-    libunwind8 \
-    netcat \
-    libssl1.0 \
-    gnupg \
+    jq \
     lsb-release \
+    software-properties-common \
   && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get -y upgrade
@@ -40,7 +37,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common
 
 #install yq
-RUN wget https://github.com/mikefarah/yq/releases/download/v4.30.8/yq_linux_amd64 \
+RUN wget https://github.com/mikefarah/yq/releases/download/v4.40.7/yq_linux_amd64 \
     && mv ./yq_linux_amd64 /usr/bin/yq \
     && chmod +x /usr/bin/yq
 
@@ -70,7 +67,7 @@ RUN apt-get update && apt-get -y upgrade
 
 COPY ./start.sh .
 RUN chmod +x start.sh
-RUN curl -LsS https://vstsagentpackage.azureedge.net/agent/3.220.5/vsts-agent-linux-x64-3.220.5.tar.gz | tar -xz
+RUN curl -LsS https://vstsagentpackage.azureedge.net/agent/3.232.3/vsts-agent-linux-x64-3.232.3.tar.gz | tar -xz
 
 # Create and swith to non-root user
 RUN groupadd -g "10000" azuredevops
@@ -83,5 +80,10 @@ RUN sudo chown -R azuredevops /azp
 RUN sudo chown -R azuredevops /home/azuredevops
 
 USER azuredevops
+
+# Create docker user group and utilize it
+RUN sudo groupadd docker
+RUN sudo usermod -aG docker azuredevops
+RUN sudo newgrp docker
 
 ENTRYPOINT ["./start.sh"]
