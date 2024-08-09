@@ -58,7 +58,7 @@ serviceAccount:
   # Specifies whether a service account should be created
   create: true
   # Automatically mount a ServiceAccount's API credentials?
-  automount: true
+  automount: false
   # Annotations to add to the service account
   annotations: {}
 
@@ -72,3 +72,4 @@ podSecurityContext:
   runAsUser: 10000
   runAsGroup: 10000
 securityContext: {}
+automountServiceAccountToken: false
