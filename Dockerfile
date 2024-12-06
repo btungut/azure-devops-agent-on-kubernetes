@@ -5,7 +5,7 @@ WORKDIR /azp
 
 
 ENV TARGETARCH=linux-x64
-ENV VSTS_AGENT_VERSION=3.232.3
+ENV VSTS_AGENT_VERSION=3.248.0
 
 
 # To make it easier for build and release pipelines to run apt-get,
