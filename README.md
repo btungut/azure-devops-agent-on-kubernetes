@@ -6,7 +6,26 @@
 
 The easiest and most effective method for creating and managing Azure DevOps agents on Kubernetes, without the need to spend time and effort wrestling with settings! Scale-out as much as is necessary and demolish them gracefully.
 
+## Compatibility Matrix
+
+The table presented below outlines the correspondence between Helm chart versions, Docker tags, and the Azure DevOps agent versions included within those Docker images.
+
+| Helm Version | Docker Tag | Agent Version |
+|--------------|------------|---------------|
+| 2.0.1        | 3.248.0    | 3.248.0       |
+| 2.0.0        | 3.232.3    | 3.232.3       |
+| 1.0.7        | 2.214.1    | 2.214.1       |
+
 ## Important Release Notes
+
+### 2.0.1
+
+- :white_check_mark: [duplicate apt install command](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/16)
+- :white_check_mark: [yq download the latest version](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/22)
+- :white_check_mark: [Upgrade VSTS agent to 3.248.0](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/23)
+- :white_check_mark: Optimize the Dockerfile steps and add comment lines.
+
+
 
 ### 2.0.0
 
@@ -108,7 +127,7 @@ helm delete {RELEASE-NAME}
 | Name                | Description                                           | Value                 |
 | ------------------- | ----------------------------------------------------- | --------------------- |
 | `image.repository`  | Azure DevOps agent image repository                           | `btungut/azure-devops-agent`       |
-| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `3.232.3` |
+| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `3.248.0` |
 | `image.pullPolicy`  | Azure DevOps agent image pull policy                          | `IfNotPresent`        |
 | `image.pullSecrets` | Azure DevOps agent image pull secrets                         | `[]`                  |
 | `replicaCount` | Replica count for deployment                        | `1`                  |
