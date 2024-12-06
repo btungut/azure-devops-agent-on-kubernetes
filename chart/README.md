@@ -4,6 +4,15 @@ The easiest and most effective method for creating and managing Azure DevOps age
 
 ## Important Release Notes
 
+### 2.0.1
+
+- :white_check_mark: [duplicate apt install command](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/16)
+- :white_check_mark: [yq download the latest version](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/22)
+- :white_check_mark: [Upgrade VSTS agent to 3.248.0](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/23)
+- :white_check_mark: Optimize the Dockerfile steps and add comment lines.
+
+
+
 ### 2.0.0
 
 - :white_check_mark: [ubuntu 20.04 based image](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/13)
@@ -104,7 +113,7 @@ helm delete {RELEASE-NAME}
 | Name                | Description                                           | Value                 |
 | ------------------- | ----------------------------------------------------- | --------------------- |
 | `image.repository`  | Azure DevOps agent image repository                           | `btungut/azure-devops-agent`       |
-| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `3.232.3` |
+| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `3.248.0` |
 | `image.pullPolicy`  | Azure DevOps agent image pull policy                          | `IfNotPresent`        |
 | `image.pullSecrets` | Azure DevOps agent image pull secrets                         | `[]`                  |
 | `replicaCount` | Replica count for deployment                        | `1`                  |
