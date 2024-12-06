@@ -6,6 +6,16 @@
 
 The easiest and most effective method for creating and managing Azure DevOps agents on Kubernetes, without the need to spend time and effort wrestling with settings! Scale-out as much as is necessary and demolish them gracefully.
 
+## Compatibility Matrix
+
+The table presented below outlines the correspondence between Helm chart versions, Docker tags, and the Azure DevOps agent versions included within those Docker images.
+
+| Helm Version | Docker Tag | Agent Version |
+|--------------|------------|---------------|
+| 2.0.1        | 3.248.0    | 3.248.0       |
+| 2.0.0        | 3.232.3    | 3.232.3       |
+| 1.0.7        | 2.214.1    | 2.214.1       |
+
 ## Important Release Notes
 
 ### 2.0.1
