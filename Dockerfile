@@ -104,6 +104,7 @@ RUN echo "azdouser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 WORKDIR /home/azdouser
 RUN chown -R azdouser /home/azdouser
 RUN chown -R azdouser /azp
+RUN chown -R azdouser /var/run/docker.sock || true
 USER azdouser
 
 
