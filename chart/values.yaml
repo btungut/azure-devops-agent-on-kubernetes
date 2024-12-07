@@ -28,7 +28,7 @@ fullnameOverride: ""
 replicaCount: 1
 
 image:
-  registry: docker.io
+  # registry: docker.io
   repository: btungut/azure-devops-agent
   pullPolicy: IfNotPresent
   tag: "3.248.0"
@@ -69,6 +69,5 @@ podLabels: {}
 podAnnotations: {}
 podSecurityContext:
   runAsNonRoot: true
-  runAsUser: 10000
-  runAsGroup: 10000
+  runAsUser: 1000
 securityContext: {}

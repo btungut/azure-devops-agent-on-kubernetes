@@ -2,8 +2,6 @@ ARG ARG_UBUNTU_BASE_IMAGE_TAG="20.04"
 
 FROM ubuntu:${ARG_UBUNTU_BASE_IMAGE_TAG}
 WORKDIR /azp
-
-
 ENV TARGETARCH=linux-x64
 ENV VSTS_AGENT_VERSION=3.248.0
 
@@ -99,25 +97,17 @@ RUN chmod +x start.sh
 
 
 
-# Create and swith to non-root user
-RUN groupadd -g "10000" azuredevops
-RUN useradd --create-home --no-log-init -u "10000" -g "10000" azuredevops
-RUN apt-get update \
-    && apt-get install -y sudo \
-    && echo azuredevops ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/azuredevops \
-    && chmod 0440 /etc/sudoers.d/azuredevops
-RUN sudo chown -R azuredevops /azp
-RUN sudo chown -R azuredevops /home/azuredevops
-
-USER azuredevops
+# Create non-root user under docker group
+RUN useradd -m -s /bin/bash -u "1000" azdouser
+RUN groupadd docker && usermod -aG docker azdouser
+RUN echo "azdouser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+WORKDIR /home/azdouser
+RUN chown -R azdouser /home/azdouser
+RUN chown -R azdouser /azp
+USER azdouser
 
 
 
-# Create docker user group and utilize it
-RUN sudo groupadd docker
-RUN sudo usermod -aG docker azuredevops
-RUN sudo newgrp docker
-
-
-
+# cd to /azp and run start.sh
+WORKDIR /azp
 ENTRYPOINT ["./start.sh"]
