@@ -1,4 +1,20 @@
 #!/bin/bash
+
+if [ -x "$(command -v sudo)" ]; then
+  {
+    sudo chown -R azdouser /home/azdouser
+    sudo chown -R azdouser /azp
+    sudo chown -R azdouser /var/run/docker.sock || true
+
+    if [ -S /var/run/docker.sock ]; then
+      sudo groupadd docker || true
+      sudo usermod -aG docker azdouser || true
+      sudo newgrp docker || true
+      echo "Docker.sock exists and processed!"
+    fi
+  } || true
+fi
+
 set -e
 
 if [ -z "$AZP_URL" ]; then
