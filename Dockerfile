@@ -100,13 +100,14 @@ RUN chmod +x start.sh
 # Create non-root user under docker group
 RUN useradd -m -s /bin/bash -u "1000" azdouser
 RUN groupadd docker && usermod -aG docker azdouser
-RUN echo "azdouser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-WORKDIR /home/azdouser
-RUN chown -R azdouser /home/azdouser
-RUN chown -R azdouser /azp
-RUN chown -R azdouser /var/run/docker.sock || true
-USER azdouser
+RUN apt-get update \
+    && apt-get install -y sudo \
+    && echo azdouser ALL=\(root\) NOPASSWD:ALL >> /etc/sudoers
 
+RUN sudo chown -R azdouser /home/azdouser
+RUN sudo chown -R azdouser /azp
+RUN sudo chown -R azdouser /var/run/docker.sock || true
+USER azdouser
 
 
 # cd to /azp and run start.sh
