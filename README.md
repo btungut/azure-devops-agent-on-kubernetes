@@ -62,7 +62,7 @@ Since the **1.0.8 release** , the Dockerfile and Helm chart have been configured
 
 ## Prerequisites
 - Helm
-- Personal Access Token _with Agent Pool manage scope_
+- Personal Access Token (**PAT**) with `Agent Pool manage` scope
 
 
 You don't need to follow any more instructions beyond the **standard self-hosted agent installation** in order to utilize this helm chart.
@@ -84,29 +84,102 @@ It is pretty straight-forward process with sufficient scope. Please choose **one
 helm repo add btungut https://btungut.github.io
 ```
 
-2. Install the helm chart with required parameters
-  - With bash: 
+1. Install the helm chart with specified PAT and other required parameters
+
 ```bash
 helm install {RELEASE-NAME} btungut/azure-devops-agent \
   --set agent.pat={PAT} \
   --set agent.organizationUrl=https://dev.azure.com/{YOUR-ORG} \
+  --set agent.pool="YOUR-AGENT-POOL-NAME" \
   --namespace {YOUR-NS}
 ```
 
-  - With powershell: 
-```powershell
-helm install {RELEASE-NAME} btungut/azure-devops-agent `
-  --set agent.pat={PAT} `
-  --set agent.organizationUrl=https://dev.azure.com/{YOUR-ORG} `
+2. Install the helm chart with existing secret that stores PAT
+
+```bash
+helm install {RELEASE-NAME} btungut/azure-devops-agent \
+  --set agent.patSecret={SECRET-NAME} \
+  --set agent.patSecretKey="pat" \
+  --set agent.organizationUrl=https://dev.azure.com/{YOUR-ORG} \
+  --set agent.pool="YOUR-AGENT-POOL-NAME" \
   --namespace {YOUR-NS}
 ```
 
 ## Uninstalling the Chart
 
 Run the following snippet to uninstall the release:
+
 ```bash
 helm delete {RELEASE-NAME}
 ```
+
+## docker CLI support
+
+If you want to use Docker CLI in the agent, you need to override `volumes` and `volumeMounts` parameters as shown below.
+
+```yaml
+volumes:
+  - name: dockersock
+    hostPath:
+      path: /var/run/docker.sock
+volumeMounts: []
+  - name: dockersock
+    mountPath: "/var/run/docker.sock"
+```
+
+
+## Example overriden values.yaml for running instance
+
+This the example values.yaml that you can use to run an instance with provided PAT secret and Docker CLI support.
+
+```yaml
+fullnameOverride: azdo-agent
+replicaCount: 1
+
+agent:
+  organizationUrl: "https://dev.azure.com/phonestore-ws"
+  pool: "self-hosted-azure"
+
+  patSecret: "azdo-phonestore-ws"
+  patSecretKey: "pat"
+
+# If you want to use docker CLI in the agent, you need to override volumes and volumeMounts parameters as shown below.
+volumes:
+  - name: dockersock
+    hostPath:
+      path: /var/run/docker.sock
+volumeMounts:
+  - name: dockersock
+    mountPath: "/var/run/docker.sock"
+```
+
+- This example includes and support **Docker CLI support**, if you do not need it, you can remove `volumes` and `volumeMounts` sections.
+- This example includes **Azure DevOps PAT** that is stored in a secret named `azdo-phonestore-ws` with the key `pat`. If you do not need it, you can remove `patSecret` and `patSecretKey` sections and use `pat` parameter instead.
+
+## Example overriden values.yaml for running instance with provided PAT directly without secret
+
+This the example values.yaml that you can use to run an instance with provided PAT directly and Docker CLI support.
+
+```yaml
+fullnameOverride: azdo-agent
+replicaCount: 1
+
+agent:
+  organizationUrl: "https://dev.azure.com/phonestore-ws"
+  pool: "self-hosted-azure"
+
+  pat: "YOUR-PAT-HERE"
+
+# If you want to use docker CLI in the agent, you need to override volumes and volumeMounts parameters as shown below.
+volumes:
+  - name: dockersock
+    hostPath:
+      path: /var/run/docker.sock
+volumeMounts:
+  - name: dockersock
+    mountPath: "/var/run/docker.sock"
+```
+
 
 ## Parameters
 
@@ -134,8 +207,9 @@ helm delete {RELEASE-NAME}
 
 | Name                | Description                                           | Value                 |
 | ------------------- | ----------------------------------------------------- | --------------------- |
+| `image.registry`  | Azure DevOps agent image registry                           | `docker.io`           |
 | `image.repository`  | Azure DevOps agent image repository                           | `btungut/azure-devops-agent`       |
-| `image.tag`         | Azure DevOps agent image tag (immutable tags are recommended) | `3.248.0` |
+| `image.tag`  | Azure DevOps agent image tag                           | `3.248.0-stable-v2.1.0`       |
 | `image.pullPolicy`  | Azure DevOps agent image pull policy                          | `IfNotPresent`        |
 | `image.pullSecrets` | Azure DevOps agent image pull secrets                         | `[]`                  |
 | `replicaCount` | Replica count for deployment                        | `1`                  |
@@ -147,6 +221,8 @@ helm delete {RELEASE-NAME}
 | `volumeMounts` | Volume mountings | `[]`                  |
 
 Please refer the values.yaml for other parameters.
+
+
 
 ## Built-in binaries & packages
 The binaries and packages listed below are included in the docker image used by the helm chart:
@@ -162,7 +238,3 @@ The binaries and packages listed below are included in the docker image used by 
 - Azure CLI
   - with Azure DevOps extension
 
-## Contributors
-
-- [Burak Tungut](https://github.com/btungut)
-- [Alexandre Saison](https://github.com/saisona)
