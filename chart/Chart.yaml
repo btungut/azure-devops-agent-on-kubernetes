@@ -9,6 +9,9 @@ keywords:
   - build agent
   - dockerized agent
   - azure devops agent on kubernetes
+  - azure devops agent
+  - kubernetes
+  - devops
 home: "https://github.com/btungut/azure-devops-agent-on-kubernetes"
 sources:
   - "https://github.com/btungut/azure-devops-agent-on-kubernetes"
