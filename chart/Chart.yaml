@@ -2,13 +2,16 @@ apiVersion: v2
 name: azure-devops-agent
 description: Dockerized build agent for Azure DevOps
 type: application
-version: 2.0.0
-appVersion: "3.232.3"
+version: 2.1.0
+appVersion: "3.248.0-stable-v2.1.0"
 keywords:
   - azure devops
   - build agent
   - dockerized agent
   - azure devops agent on kubernetes
+  - azure devops agent
+  - kubernetes
+  - devops
 home: "https://github.com/btungut/azure-devops-agent-on-kubernetes"
 sources:
   - "https://github.com/btungut/azure-devops-agent-on-kubernetes"
