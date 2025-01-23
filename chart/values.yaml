@@ -9,7 +9,6 @@ agent:
   patSecretKey: "pat"
   # ---------- AUTH  ----------
 
-  
   # Server / organization url, e.g.: https://dev.azure.com/your-organization-name
   organizationUrl: ""
 
@@ -50,7 +49,6 @@ volumeMounts: []
   # - name: dockersock
   #   mountPath: "/var/run/docker.sock"
 
-
 serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
@@ -61,6 +59,23 @@ serviceAccount:
   automount: true
   # Annotations to add to the service account
   annotations: {}
+
+sideContainers:
+  # - name: sidecar
+  #   imagePullPolicy: Always
+  #   image: nginx:latest
+  #   securityContext:
+  #     privileged: true
+  #   env:
+  #     - name: POD_NAME
+  #       valueFrom:
+  #         fieldRef:
+  #           fieldPath: metadata.name
+  #     - name: POD_UID
+  #       valueFrom:
+  #         fieldRef:
+  #           fieldPath: metadata.uid
+
 
 nodeSelector: {}
 tolerations: []
