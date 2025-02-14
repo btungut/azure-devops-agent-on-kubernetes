@@ -60,10 +60,11 @@ serviceAccount:
   # Annotations to add to the service account
   annotations: {}
 
+# sideContainers is a list of containers that should run alongside the main container(s).
 sideContainers:
   # - name: sidecar
-  #   imagePullPolicy: Always
-  #   image: nginx:latest
+  #   image: busybox:latest
+  #   command: ["sleep", "infinity"]
   #   securityContext:
   #     privileged: true
   #   env:
