@@ -2,7 +2,7 @@ apiVersion: v2
 name: azure-devops-agent
 description: Dockerized build agent for Azure DevOps
 type: application
-version: 2.1.0
+version: 2.1.1
 appVersion: "3.248.0-stable-v2.1.0"
 keywords:
   - azure devops

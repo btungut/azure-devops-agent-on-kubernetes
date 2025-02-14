@@ -19,12 +19,21 @@ The table presented below outlines the correspondence between Helm chart version
 
 | Helm Version | Docker Tag | Agent Version |
 |--------------|------------|---------------|
+| 2.1.1        | 3.248.0-stable-v2.1.0    | 3.248.0       |
 | 2.1.0        | 3.248.0-stable-v2.1.0    | 3.248.0       |
 | 2.0.1        | 3.248.0    | 3.248.0       |
 | 2.0.0        | 3.232.3    | 3.232.3       |
 | 1.0.7        | 2.214.1    | 2.214.1       |
 
 ## Important Release Notes
+
+### 2.1.1
+
+This helm release deploys the same agent version but contains `sideContainers` support for helm chart.
+
+- :white_check_mark: [Feature add sideContainers support](https://github.com/btungut/azure-devops-agent-on-kubernetes/pull/33)
+- :white_check_mark: [Add sidecar containers](https://github.com/btungut/azure-devops-agent-on-kubernetes/pull/31)
+
 
 ### 2.1.0
 

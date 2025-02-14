@@ -8,6 +8,7 @@ The table presented below outlines the correspondence between Helm chart version
 
 | Helm Version | Docker Tag | Agent Version |
 |--------------|------------|---------------|
+| 2.1.1        | 3.248.0-stable-v2.1.0    | 3.248.0       |
 | 2.1.0        | 3.248.0-stable-v2.1.0    | 3.248.0       |
 | 2.0.1        | 3.248.0    | 3.248.0       |
 | 2.0.0        | 3.232.3    | 3.232.3       |
