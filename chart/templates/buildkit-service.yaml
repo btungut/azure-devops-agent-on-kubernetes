@@ -1,0 +1,14 @@
+{{- if .Values.buildkit.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: buildkitd
+  name: buildkitd
+spec:
+  ports:
+    - port: 6942
+      protocol: TCP
+  selector:
+    app: buildkitd
+{{- end }}

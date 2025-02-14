@@ -4,6 +4,7 @@ FROM ubuntu:${ARG_UBUNTU_BASE_IMAGE_TAG}
 WORKDIR /azp
 ENV TARGETARCH=linux-x64
 ENV VSTS_AGENT_VERSION=3.248.0
+ENV BUILDKIT_VERSION=0.19.0
 
 
 # To make it easier for build and release pipelines to run apt-get,
@@ -22,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     iputils-ping \
     jq \
     lsb-release \
+    vim \
     software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 RUN apt-get update && apt-get -y upgrade
@@ -34,6 +36,10 @@ RUN printenv \
 RUN curl -LsS https://vstsagentpackage.azureedge.net/agent/${VSTS_AGENT_VERSION}/vsts-agent-${TARGETARCH}-${VSTS_AGENT_VERSION}.tar.gz | tar -xz
 
 
+#Install buildkit
+RUN curl -fsSL -o /tmp/buildkit.tar.gz  https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-amd64.tar.gz
+RUN tar -xzf /tmp/buildkit.tar.gz -C /tmp/
+RUN mv /tmp/bin/* /usr/local/bin 
 
 # Install Azure CLI & Azure DevOps extension
 RUN curl -LsS https://aka.ms/InstallAzureCLIDeb | bash \
@@ -92,7 +98,7 @@ RUN apt-get update && apt-get -y upgrade
 
 
 # Copy start script
-COPY ./start.sh .
+COPY src/start.sh .
 RUN chmod +x start.sh
 
 
