@@ -52,7 +52,6 @@ volumeMounts: []
 
 buildkit:
   enabled: false
-  cache: false
 
 serviceAccount:
   # The name of the service account to use.
