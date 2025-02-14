@@ -6,6 +6,13 @@
 
 The easiest and most effective method for creating and managing Azure DevOps agents on Kubernetes, without the need to spend time and effort wrestling with settings! Scale-out as much as is necessary and demolish them gracefully.
 
+## YouTube Tutorial Video
+
+You can watch the tutorial video below to learn how to deploy Azure DevOps agents on Kubernetes.
+
+[![Azure DevOps Agent on Kubernetes - How to deploy build agents on Kubernetes - Tutorial](https://img.youtube.com/vi/HnLoIx35U0k/0.jpg)](https://www.youtube.com/watch?v=HnLoIx35U0k)
+
+
 ## Compatibility Matrix
 
 The table presented below outlines the correspondence between Helm chart versions, Docker tags, and the Azure DevOps agent versions included within those Docker images.

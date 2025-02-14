@@ -1,0 +1,11 @@
+fullnameOverride: azdo-agent
+
+agent:
+  # Required! e.g.: https://dev.azure.com/myorg
+  organizationUrl: ""
+
+  # Required! e.g.: your-pool-name
+  pool: ""
+
+  # Required! e.g.: your-pat (which is a Personal Access Token with Agent Pools (read, manage) scope)
+  pat: ""
