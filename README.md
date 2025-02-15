@@ -10,7 +10,9 @@ The easiest and most effective method for creating and managing Azure DevOps age
 
 You can watch the tutorial video below to learn how to deploy Azure DevOps agents on Kubernetes.
 
-[![Azure DevOps Agent on Kubernetes - How to deploy build agents on Kubernetes - Tutorial](https://img.youtube.com/vi/HnLoIx35U0k/0.jpg)](https://www.youtube.com/watch?v=HnLoIx35U0k)
+> LET'S CLICK ON THE IMAGE BELOW TO WATCH THE TUTORIAL VIDEO!qep2l1oxknk
+
+[![Azure DevOps Agent on Kubernetes - How to deploy build agents on Kubernetes - Tutorial](https://img.youtube.com/vi/qep2l1oxknk/0.jpg)](https://www.youtube.com/watch?v=qep2l1oxknk)
 
 
 ## Compatibility Matrix
