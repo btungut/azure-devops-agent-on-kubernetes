@@ -30,6 +30,13 @@ The table presented below outlines the correspondence between Helm chart version
 
 ## Important Release Notes
 
+### 2.2.0
+
+This helm release uses the latest stable Azure Devops Agent version which is **4.251.0**.
+
+- :white_check_mark: [Upgrade VSTS agent to 4.251.0](https://github.com/btungut/azure-devops-agent-on-kubernetes/pull/35)
+  - :white_check_mark: [Issue: Upgrade VSTS agent to 4.251.0](https://github.com/btungut/azure-devops-agent-on-kubernetes/issues/34)
+
 ### 2.1.1
 
 This helm release deploys the same agent version but contains `sideContainers` support for helm chart.
