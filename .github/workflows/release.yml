@@ -11,8 +11,7 @@ on:
 
     
 env:
-  DOCKER_BUILDKIT: 1
-  DOCKER_REPO_TAG: "azure-devops-agent:${{ github.event.inputs.docker-tag }}"
+  DOCKER_REPO_TAG: "btungut/azure-devops-agent:${{ github.event.inputs.docker-tag }}"
 
 
 jobs:
