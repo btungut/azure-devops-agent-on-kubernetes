@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
+  pull_request:
+
+env:
+  DOCKER_BUILDKIT: 1
+  DOCKER_REPO_TAG: "${{ github.repository }}:${{ github.sha }}"
+
+jobs:
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: docker build
+      uses: docker/build-push-action@v4
+      with:
+        context: src
+        file: ./Dockerfile
+        push: false
+        tags: ${{ env.DOCKER_REPO_TAG }}

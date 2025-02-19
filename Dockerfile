@@ -3,7 +3,7 @@ ARG ARG_UBUNTU_BASE_IMAGE_TAG="20.04"
 FROM ubuntu:${ARG_UBUNTU_BASE_IMAGE_TAG}
 WORKDIR /azp
 ENV TARGETARCH=linux-x64
-ENV VSTS_AGENT_VERSION=3.248.0
+ENV VSTS_AGENT_VERSION=4.251.0
 
 
 # To make it easier for build and release pipelines to run apt-get,
