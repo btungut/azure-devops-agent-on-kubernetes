@@ -6,13 +6,14 @@ The easiest and most effective method for creating and managing Azure DevOps age
 
 The table presented below outlines the correspondence between Helm chart versions, Docker tags, and the Azure DevOps agent versions included within those Docker images.
 
-| Helm Version | Docker Tag | Agent Version |
-|--------------|------------|---------------|
-| 2.1.1        | 3.248.0-stable-v2.1.0    | 3.248.0       |
-| 2.1.0        | 3.248.0-stable-v2.1.0    | 3.248.0       |
-| 2.0.1        | 3.248.0    | 3.248.0       |
-| 2.0.0        | 3.232.3    | 3.232.3       |
-| 1.0.7        | 2.214.1    | 2.214.1       |
+| Helm Version | Docker Tag            | Agent Version |
+| ------------ | --------------------- | ------------- |
+| 2.2.0        | 4.251.0-stable-v2.2.0 | 4.251.0       |
+| 2.1.1        | 3.248.0-stable-v2.1.0 | 3.248.0       |
+| 2.1.0        | 3.248.0-stable-v2.1.0 | 3.248.0       |
+| 2.0.1        | 3.248.0               | 3.248.0       |
+| 2.0.0        | 3.232.3               | 3.232.3       |
+| 1.0.7        | 2.214.1               | 2.214.1       |
 
 ## Prerequisites
 - Helm
@@ -141,38 +142,38 @@ volumeMounts:
 
 > :warning: Helm chart provides two option for authentication. Please use only one of them.
 
-| Name                | Description                                           | Value                 |
-| ------------------- | ----------------------------------------------------- | --------------------- |
-| `agent.pat` | (1st Option) Personal access token for authentication                                   | `""`   |
-| `agent.patSecret` | (2nd Option) Already existing secret name that stores PAT                         | `""`   |
-| `agent.patSecretKey` | (2nd Option) Key (field) name of the PAT that is stored in secret              | `"pat"`|
+| Name                 | Description                                                       | Value   |
+| -------------------- | ----------------------------------------------------------------- | ------- |
+| `agent.pat`          | (1st Option) Personal access token for authentication             | `""`    |
+| `agent.patSecret`    | (2nd Option) Already existing secret name that stores PAT         | `""`    |
+| `agent.patSecretKey` | (2nd Option) Key (field) name of the PAT that is stored in secret | `"pat"` |
 
 
 ### Agent configuration parameters
 
-| Name                | Description                                           | Value                 |
-| ------------------- | ----------------------------------------------------- | --------------------- |
-| `agent.organizationUrl` | Server / organization url, e.g.: https://dev.azure.com/your-organization-name                                   | `""`   |
-| `agent.pool` | Agent pool name which the build agent is placed into                                   | `"Default"`   |
-| `agent.workingDirectory` | Working directory of the agent                                   | `"_work"`   |
-| `agent.extraEnv` | Additional environment variables as dictionary                                   | `{}`   |
+| Name                     | Description                                                                   | Value       |
+| ------------------------ | ----------------------------------------------------------------------------- | ----------- |
+| `agent.organizationUrl`  | Server / organization url, e.g.: https://dev.azure.com/your-organization-name | `""`        |
+| `agent.pool`             | Agent pool name which the build agent is placed into                          | `"Default"` |
+| `agent.workingDirectory` | Working directory of the agent                                                | `"_work"`   |
+| `agent.extraEnv`         | Additional environment variables as dictionary                                | `{}`        |
 
 ### Other parameters
 
-| Name                | Description                                           | Value                 |
-| ------------------- | ----------------------------------------------------- | --------------------- |
-| `image.registry`  | Azure DevOps agent image registry                           | `docker.io`           |
-| `image.repository`  | Azure DevOps agent image repository                           | `btungut/azure-devops-agent`       |
-| `image.tag`  | Azure DevOps agent image tag                           | `3.248.0-stable-v2.1.0`       |
-| `image.pullPolicy`  | Azure DevOps agent image pull policy                          | `IfNotPresent`        |
-| `image.pullSecrets` | Azure DevOps agent image pull secrets                         | `[]`                  |
-| `replicaCount` | Replica count for deployment                        | `1`                  |
-| `resources.requests.cpu` | CPU request value for scheduling                        | `"100m"`                  |
-| `resources.requests.memory` | Memory request value for scheduling                        | `"128Mi"`                  |
-| `resources.limits.cpu` | CPU limit value for scheduling                        | `"500m"`                  |
-| `resources.limits.memory` | Memory limit value for scheduling                        | `"512Mi"`                  |
-| `volumes` | Volumes for the container | `[]`                  |
-| `volumeMounts` | Volume mountings | `[]`                  |
+| Name                        | Description                           | Value                        |
+| --------------------------- | ------------------------------------- | ---------------------------- |
+| `image.registry`            | Azure DevOps agent image registry     | `docker.io`                  |
+| `image.repository`          | Azure DevOps agent image repository   | `btungut/azure-devops-agent` |
+| `image.tag`                 | Azure DevOps agent image tag          | refer to values.yaml         |
+| `image.pullPolicy`          | Azure DevOps agent image pull policy  | `IfNotPresent`               |
+| `image.pullSecrets`         | Azure DevOps agent image pull secrets | `[]`                         |
+| `replicaCount`              | Replica count for deployment          | `1`                          |
+| `resources.requests.cpu`    | CPU request value for scheduling      | `"100m"`                     |
+| `resources.requests.memory` | Memory request value for scheduling   | `"128Mi"`                    |
+| `resources.limits.cpu`      | CPU limit value for scheduling        | `"500m"`                     |
+| `resources.limits.memory`   | Memory limit value for scheduling     | `"512Mi"`                    |
+| `volumes`                   | Volumes for the container             | `[]`                         |
+| `volumeMounts`              | Volume mountings                      | `[]`                         |
 
 Please refer the values.yaml for other parameters.
 
@@ -191,4 +192,3 @@ The binaries and packages listed below are included in the docker image used by 
 - Docker CLI
 - Azure CLI
   - with Azure DevOps extension
-
