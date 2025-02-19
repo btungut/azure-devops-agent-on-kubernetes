@@ -1,0 +1,80 @@
+name: Release
+on: 
+  workflow_dispatch: 
+    inputs: 
+      version: 
+        description: 'Release tag without v'
+        required: true
+      docker-tag: 
+        description: 'Docker tag'
+        required: true
+
+    
+env:
+  DOCKER_BUILDKIT: 1
+  DOCKER_REPO_TAG: "azure-devops-agent:${{ github.event.inputs.docker-tag }}"
+
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: docker login
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: docker build
+      uses: docker/build-push-action@v4
+      with:
+        context: src
+        file: ./Dockerfile
+        push: true
+        tags: ${{ env.DOCKER_REPO_TAG }}
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [validate]
+    if: success('validate')
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: helm_install
+      uses: azure/setup-helm@v4.3.0
+      with:
+        version: v3.17.0
+
+    - name: helm_package
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        helm dep update .
+        helm package .
+        helm repo index .
+
+        cat index.yaml >> $GITHUB_STEP_SUMMARY
+      working-directory: chart
+
+    - name: upload_artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: chart
+        path: chart/*.tgz
+
+    - name: create_github_release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          chart/*.tgz
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag_name: v${{ github.event.inputs.version }}
+        generate_release_notes: true
+        prerelease: false
+        draft: true
