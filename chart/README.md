@@ -32,6 +32,16 @@ With the **2.3.0 release**, the helm chart has been updated to use the latest Az
 
 - :white_check_mark: [Upgrade VSTS agent to 4.255.0](https://github.com/btungut/azure-devops-agent-on-kubernetes/pull/38)
 - :white_check_mark: [Add git-lfs support](https://github.com/btungut/azure-devops-agent-on-kubernetes/pull/37)
+- :white_check_mark: [BREAKING CHANGE: Change container resources requests and limits to NULL / empty / `{}`](https://github.com/btungut/azure-devops-agent-on-kubernetes/pull/39)
+
+
+#### IMPORTANT & BREAKING CHANGE
+
+- The values of **requests and limits for the container resources** have been changed from specific values to NULL / empty / `{}`.
+
+> This means that the container will use the default values of the Kubernetes cluster for CPU and memory resources. Please make sure to adjust the values according to your needs if you want to set specific values for CPU and memory resources.
+
+**To see the changes**, please visit the [values.yaml changes for PR 39](https://github.com/btungut/azure-devops-agent-on-kubernetes/pull/39/files)
 
 ### 2.2.0
 
@@ -226,20 +236,17 @@ volumeMounts:
 
 ### Other parameters
 
-| Name                        | Description                           | Value                        |
-| --------------------------- | ------------------------------------- | ---------------------------- |
-| `image.registry`            | Azure DevOps agent image registry     | `docker.io`                  |
-| `image.repository`          | Azure DevOps agent image repository   | `btungut/azure-devops-agent` |
-| `image.tag`                 | Azure DevOps agent image tag          | refer to values.yaml         |
-| `image.pullPolicy`          | Azure DevOps agent image pull policy  | `IfNotPresent`               |
-| `image.pullSecrets`         | Azure DevOps agent image pull secrets | `[]`                         |
-| `replicaCount`              | Replica count for deployment          | `1`                          |
-| `resources.requests.cpu`    | CPU request value for scheduling      | `"100m"`                     |
-| `resources.requests.memory` | Memory request value for scheduling   | `"128Mi"`                    |
-| `resources.limits.cpu`      | CPU limit value for scheduling        | `"500m"`                     |
-| `resources.limits.memory`   | Memory limit value for scheduling     | `"512Mi"`                    |
-| `volumes`                   | Volumes for the container             | `[]`                         |
-| `volumeMounts`              | Volume mountings                      | `[]`                         |
+| Name                        | Description                                    | Value                        |
+| --------------------------- | ---------------------------------------------- | ---------------------------- |
+| `image.registry`            | Azure DevOps agent image registry              | `docker.io`                  |
+| `image.repository`          | Azure DevOps agent image repository            | `btungut/azure-devops-agent` |
+| `image.tag`                 | Azure DevOps agent image tag                   | refer to values.yaml         |
+| `image.pullPolicy`          | Azure DevOps agent image pull policy           | `IfNotPresent`               |
+| `image.pullSecrets`         | Azure DevOps agent image pull secrets          | `[]`                         |
+| `replicaCount`              | Replica count for deployment                   | `1`                          |
+| `resources`                 | Resource requests and limits for the container | `{}`                         |
+| `volumes`                   | Volumes for the container                      | `[]`                         |
+| `volumeMounts`              | Volume mountings                               | `[]`                         |
 
 Please refer the values.yaml for other parameters.
 

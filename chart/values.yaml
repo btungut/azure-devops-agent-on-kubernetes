@@ -30,7 +30,7 @@ image:
   # registry: docker.io
   repository: btungut/azure-devops-agent
   pullPolicy: IfNotPresent
-  tag: "4.251.0-stable-v2.3.0"
+  tag: "v2.3.0-vsts-v2.255.0"
   pullSecrets: []
 
 
