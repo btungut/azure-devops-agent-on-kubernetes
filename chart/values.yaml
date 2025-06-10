@@ -33,13 +33,16 @@ image:
   tag: "4.251.0-stable-v2.3.0"
   pullSecrets: []
 
-resources:
-  limits:
-    cpu: 500m
-    memory: 512Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
+
+### You can uncomment the following lines to set resource limits and requests for the agent container.
+### NOTE: Resource limits must be set according to your needs and the capabilities of your Kubernetes cluster!!!
+resources: {}
+  # limits:
+  #   cpu: 500m
+  #   memory: 512Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
 volumes: []
   # - name: dockersock
