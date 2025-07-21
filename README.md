@@ -20,6 +20,7 @@ The table presented below outlines the correspondence between Helm chart version
 
 | Helm Version | Docker Tag            | Agent Version |
 | ------------ | --------------------- | ------------- |
+| 2.4.0        | v2.4.0-vsts-v2.258.1  | 4.258.1       |
 | 2.3.0        | v2.3.0-vsts-v2.255.0  | 4.255.0       |
 | 2.2.0        | 4.251.0-stable-v2.2.0 | 4.251.0       |
 | 2.1.1        | 3.248.0-stable-v2.1.0 | 3.248.0       |
@@ -29,6 +30,13 @@ The table presented below outlines the correspondence between Helm chart version
 | 1.0.7        | 2.214.1               | 2.214.1       |
 
 ## Important Release Notes
+
+### 2.4.0
+
+With the **2.4.0 release**, the helm chart has been updated to use the latest Azure DevOps agent version **4.258.1**.
+
+- :white_check_mark: [fix: Update download URL of the Azure DevOps agent](https://github.com/btungut/azure-devops-agent-on-kubernetes/pull/41)
+- :white_check_mark: Upgrade VSTS agent to **4.258.1**
 
 ### 2.3.0
 
