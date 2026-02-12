@@ -16,6 +16,7 @@ The table presented below outlines the correspondence between Helm chart version
 
 | Helm Version | Docker Tag            | Agent Version |
 | ------------ | --------------------- | ------------- |
+| 2.5.0        | v2.5.0-vsts-v2.268.0  | 4.268.0       |
 | 2.4.0        | v2.4.0-vsts-v2.258.1  | 4.258.1       |
 | 2.3.0        | v2.3.0-vsts-v2.255.0  | 4.255.0       |
 | 2.2.0        | 4.251.0-stable-v2.2.0 | 4.251.0       |
@@ -26,6 +27,14 @@ The table presented below outlines the correspondence between Helm chart version
 | 1.0.7        | 2.214.1               | 2.214.1       |
 
 ## Important Release Notes
+
+### 2.5.0
+
+With the **2.5.0 release**, the helm chart has been updated to use the latest Azure DevOps agent version **4.268.0** and includes new configuration options.
+
+- :white_check_mark: Upgrade VSTS agent to **4.268.0**
+- :white_check_mark: [feat: Allow to define terminationGracePeriodSeconds](https://github.com/btungut/azure-devops-agent-on-kubernetes/pull/45)
+  - Added support for configuring pod termination grace period (default: 30 seconds)
 
 ### 2.4.0
 
@@ -244,17 +253,18 @@ volumeMounts:
 
 ### Other parameters
 
-| Name                        | Description                                    | Value                        |
-| --------------------------- | ---------------------------------------------- | ---------------------------- |
-| `image.registry`            | Azure DevOps agent image registry              | `docker.io`                  |
-| `image.repository`          | Azure DevOps agent image repository            | `btungut/azure-devops-agent` |
-| `image.tag`                 | Azure DevOps agent image tag                   | refer to values.yaml         |
-| `image.pullPolicy`          | Azure DevOps agent image pull policy           | `IfNotPresent`               |
-| `image.pullSecrets`         | Azure DevOps agent image pull secrets          | `[]`                         |
-| `replicaCount`              | Replica count for deployment                   | `1`                          |
-| `resources`                 | Resource requests and limits for the container | `{}`                         |
-| `volumes`                   | Volumes for the container                      | `[]`                         |
-| `volumeMounts`              | Volume mountings                               | `[]`                         |
+| Name                              | Description                                           | Value                        |
+| --------------------------------- | ----------------------------------------------------- | ---------------------------- |
+| `image.registry`                  | Azure DevOps agent image registry                     | `docker.io`                  |
+| `image.repository`                | Azure DevOps agent image repository                   | `btungut/azure-devops-agent` |
+| `image.tag`                       | Azure DevOps agent image tag                          | refer to values.yaml         |
+| `image.pullPolicy`                | Azure DevOps agent image pull policy                  | `IfNotPresent`               |
+| `image.pullSecrets`               | Azure DevOps agent image pull secrets                 | `[]`                         |
+| `replicaCount`                    | Replica count for deployment                          | `1`                          |
+| `resources`                       | Resource requests and limits for the container        | `{}`                         |
+| `volumes`                         | Volumes for the container                             | `[]`                         |
+| `volumeMounts`                    | Volume mountings                                      | `[]`                         |
+| `terminationGracePeriodSeconds`   | Time to wait before forcefully terminating the pod    | `30`                         |
 
 Please refer the values.yaml for other parameters.
 
