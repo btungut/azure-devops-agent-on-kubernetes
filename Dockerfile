@@ -1,5 +1,5 @@
 ARG ARG_UBUNTU_BASE_IMAGE="ubuntu"
-ARG ARG_UBUNTU_BASE_IMAGE_TAG="20.04"
+ARG ARG_UBUNTU_BASE_IMAGE_TAG="24.04"
 
 FROM ${ARG_UBUNTU_BASE_IMAGE}:${ARG_UBUNTU_BASE_IMAGE_TAG}
 WORKDIR /azp
@@ -24,7 +24,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     iputils-ping \
     jq \
     lsb-release \
+    python3-venv \
     software-properties-common \
+    unzip \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 RUN apt-get update && apt-get -y upgrade
 
@@ -40,13 +43,6 @@ RUN curl -LsS https://download.agent.dev.azure.com/agent/${ARG_VSTS_AGENT_VERSIO
 RUN curl -LsS https://aka.ms/InstallAzureCLIDeb | bash \
     && rm -rf /var/lib/apt/lists/*
 RUN az extension add --name azure-devops
-
-
-
-# Install required tools
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget \
-    unzip
 
 
 
@@ -99,6 +95,8 @@ RUN chmod +x start.sh
 
 
 # Create non-root user under docker group
+# Ubuntu 24.04 ships with a default 'ubuntu' user at UID 1000; remove it first
+RUN if getent passwd ubuntu > /dev/null 2>&1; then userdel -r ubuntu; fi
 RUN useradd -m -s /bin/bash -u "1000" azdouser
 RUN groupadd docker && usermod -aG docker azdouser
 RUN apt-get update \

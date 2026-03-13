@@ -11,7 +11,7 @@ on:
 
     
 env:
-  DOCKER_REPO_TAG: "btungut/azure-devops-agent:${{ github.event.inputs.docker-tag }}"
+  DOCKER_REPO_TAG: "ghcr.io/${{ github.repository_owner }}/azure-devops-agent:${{ github.event.inputs.docker-tag }}"
 
 
 jobs:
@@ -25,8 +25,9 @@ jobs:
     - name: docker login
       uses: docker/login-action@v3
       with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: docker build
       uses: docker/build-push-action@v4
